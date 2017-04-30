@@ -36,5 +36,10 @@ npm-debug.log
 # Config file
 config.js
 
-# Production JS file
+# Production CSS & JS file
 public/js/app.min.js
+public/css/style.css
+
+# Sasse cache folder
+.sass-cache
+.sass-cache/*
