@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "./node_modules/.bin/webpack && node ./bin/www",
-    "dev": "./node_modules/.bin/webpack --watch"
-
+    "start": "node ./bin/www",
+    "dev": "./node_modules/.bin/webpack --watch",
+    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
