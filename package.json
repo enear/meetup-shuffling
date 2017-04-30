@@ -5,6 +5,7 @@
   "scripts": {
     "start": "./node_modules/.bin/webpack && node ./bin/www",
     "dev": "./node_modules/.bin/webpack --watch"
+
   },
   "dependencies": {
     "body-parser": "~1.13.2",
