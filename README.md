@@ -1,2 +1,2 @@
-# meetup-shuffling
-Micro shuffle app for Meetup.com attendees
+# Meetup Shuffling Micro Page
+Little animation that shuffles through the meetup attendees.
