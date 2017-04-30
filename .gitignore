@@ -32,3 +32,6 @@ npm-debug.log
 # Webstorm Files
 .idea
 .idea/*
+
+# Config file
+config.js
