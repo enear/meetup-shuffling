@@ -16,9 +16,7 @@
     "morgan": "~1.6.1",
     "node-compass": "0.2.3",
     "serve-favicon": "~2.3.0",
-    "webpack": "^1.14.0"
-  },
-  "devDependencies": {
+    "webpack": "^1.14.0",
     "axios": "^0.15.3",
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
