@@ -34,7 +34,7 @@ npm-debug.log
 .idea/*
 
 # Config file
-config.js
+./config.js
 
 # Production CSS & JS file
 public/js/app.min.js
