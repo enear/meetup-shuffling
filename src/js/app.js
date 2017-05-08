@@ -1,5 +1,6 @@
-import WordList from "./modules/WordList";
+import AttendeesList from "./modules/AttendeesList";
 import WordSlider from "./modules/WordSlider";
+import DetailContainer from "./modules/DetailContainer";
 import { PIXEL_RATIO, CANVAS_DIMENSIONS, EVENTS } from "./constants";
 import globalEmitter from "./modules/Emitter";
 
@@ -15,11 +16,12 @@ import globalEmitter from "./modules/Emitter";
 			this._canvas.style.height = CANVAS_DIMENSIONS.height + 'px';
 			this._ctx = this._canvas.getContext( '2d' );
 			this._isActive = true;
-			this._wordList = new WordList();
+			this._detailContainer = new DetailContainer();
+			this._attendeesList = new AttendeesList();
 			this._wordSlider = new WordSlider();
 
-			globalEmitter.subscribe( EVENTS.WORD_LIST_UPDATED, ( e, wordList ) => {
-				if ( wordList.length > 0 ) {
+			globalEmitter.subscribe( EVENTS.ATTENDEES_LIST_UPDATED, ( e, attendeesList ) => {
+				if ( attendeesList.length > 0 ) {
 					this._start();
 				}
 			} );

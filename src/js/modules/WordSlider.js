@@ -1,6 +1,5 @@
 import Text from "./Text";
-import { RESPONSIVE_WIDTH_ARRAY, FONT_SIZE_LIST, EVENTS, PIXEL_RATIO } from "../constants";
-import * as CONFIG from "../config";
+import { RESPONSIVE_WIDTH_ARRAY, FONT_SIZE_LIST, EVENTS } from "../constants";
 import globalEmitter from "./Emitter";
 
 const TIME_BETWEEN_TEXTS = 100;
@@ -22,8 +21,6 @@ const FONT_SIZE_MAP = (function ( fontSizeList ) {
 })( FONT_SIZE_LIST );
 
 const DELAY_BEFORE_SHOW_DETAIL = 1000;
-
-const WORD_LIST = CONFIG.wordList;
 
 export default class WordSlider {
 
@@ -51,8 +48,15 @@ export default class WordSlider {
 			this._resizeHandlerTimeout = setTimeout( this._handleResize.bind( this ), 500 );
 		} );
 
-		globalEmitter.subscribe( EVENTS.WORD_LIST_UPDATED, ( e, wordList ) => {
-			this._wordList = wordList;
+		globalEmitter.subscribe( EVENTS.ATTENDEES_LIST_UPDATED, ( e, attendeesList ) => {
+			this._wordList = attendeesList.map( ( attendee ) => {
+				let name = attendee[ "Name" ];
+				if ( name.indexOf(' ') === -1 && name !== "" ){
+					return name;
+				} else if ( name !== "" ) {
+					return `${name.substring( 0, name.indexOf( ' ' ) + 2 )}.`
+				}
+			} ).filter( ( attendee ) => !!attendee );
 		} );
 		globalEmitter.subscribe( EVENTS.PLAY_WORD_SLIDER, () => this.start() );
 	}
@@ -131,7 +135,7 @@ export default class WordSlider {
 			if ( this._startDecreasingSpeed && timestamp - this._startDecreasingSpeed > DELAY_DURATION ) {
 				this._startDecreasingSpeed = false;
 				this._isActive = false;
-				setTimeout( () => globalEmitter.invoke( EVENTS.RESOLUTION_WINNER, this._textArr[ this._currentText ]._text ), DELAY_BEFORE_SHOW_DETAIL );
+				setTimeout( () => globalEmitter.invoke( EVENTS.RESOLUTION_WINNER, this._textArr[ this._currentText ].getId() ), DELAY_BEFORE_SHOW_DETAIL );
 			}
 
 		}
@@ -150,7 +154,7 @@ export default class WordSlider {
 	static createTextArray( wordList ) {
 		let arr = [];
 		for ( let i = 0; i < wordList.length; i++ ) {
-			arr.push( new Text( wordList[ i ], { animDuration: TIME_BETWEEN_TEXTS + OVERLAP_TIME_TEXTS } ) );
+			arr.push( new Text( wordList[ i ], i, { animDuration: TIME_BETWEEN_TEXTS + OVERLAP_TIME_TEXTS } ) );
 		}
 		return arr;
 	}

@@ -8,10 +8,11 @@ const DEFAULT_OPTIONS = {
 
 export default class Text {
 
-	constructor( text, options ) {
+	constructor( text, id, options ) {
 		this._options = { ...DEFAULT_OPTIONS, ...options };
 
 		this._startTime = null;
+		this._id = id;
 		this._currentTime = null;
 		this._text = text;
 		this._currentFontSize = this._options.fontSize;
@@ -97,6 +98,10 @@ export default class Text {
 
 	isActive() {
 		return this._isActive;
+	}
+	
+	getId() {
+		return this._id;
 	}
 
 	_getCurrentFontExpression() {
