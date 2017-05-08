@@ -1,0 +1,12 @@
+@import "variables";
+
+@mixin colours( $property, $includeDefaultColour:false ){
+	@if ( $includeDefaultColour ){
+		background: $default-color;
+	}
+	#{$property}: $default-color;
+}
+
+@mixin background-colors( $includeDefaultColour ){
+	@include colours( background, $includeDefaultColour );
+}
