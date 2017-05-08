@@ -95,8 +95,8 @@ main {
 	background: white;
 	text-align: center;
 
-	@include transition(transform 1s ease-in-out);
 	@include transform(translate3d(100%, 0, 0));
+	@include transition(transform 1s ease-in-out);
 
 	.wrap {
 		width: 80%;
