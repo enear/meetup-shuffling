@@ -50,7 +50,7 @@
 	@each $width, $font-size in $detail-font-size {
 		@media all and (max-width: ($width + px)) {
 			.detail-container {
-				.name-container {
+				.text-container {
 					font-size: em($font-size);
 					padding-bottom: em(20, $font-size);
 				}
@@ -60,7 +60,7 @@
 		@each $height in $main-responsive-height {
 			@media all and (max-width: ($width + px)) and (max-height: ($height + px)) {
 				.detail-container {
-					.name-container {
+					.text-container {
 						$count: $count + 1;
 						$fontValue: $font-size * ( 1 - ( $count * 0.08 ) );
 						font-size: em($fontValue);

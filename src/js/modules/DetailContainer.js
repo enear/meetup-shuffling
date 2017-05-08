@@ -20,6 +20,7 @@ export default class DetailContainer {
 		this._currentDetail = this._attendeesList[ textId ];
 
 		this._nameContainer.innerText = this._currentDetail[ 'Name' ];
+		this._nameContainer.setAttribute( 'href', this._currentDetail[ "URL of Member Profile" ] );
 
 		this._slideInContainer();
 	}
