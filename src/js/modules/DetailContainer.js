@@ -39,12 +39,14 @@ export default class DetailContainer {
 	_slideOutContainer() {
 		return new Promise( ( resolve ) => {
 			this._body.className = '';
+			this._body.className = 'slide-out';
 			setTimeout( resolve, 1000 );
 		} );
 	}
 
 	_slideInContainer() {
 		return new Promise( ( resolve ) => {
+			this._body.className = '';
 			this._body.className = 'slide-in';
 			setTimeout( resolve, 1000 );
 		} );
