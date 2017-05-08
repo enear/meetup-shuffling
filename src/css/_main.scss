@@ -128,6 +128,9 @@ main {
 		padding-bottom: em(20, 68);
 		text-align: center;
 		line-height: 1;
+		a {
+			color: $default-color;
+		}
 	}
 
 	.button-container {
