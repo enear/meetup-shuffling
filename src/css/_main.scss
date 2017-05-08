@@ -96,8 +96,7 @@ main {
 	text-align: center;
 
 	@include transform(translate3d(100%, 0, 0));
-	@include transition(transform 1s ease-in-out);
-
+	
 	.wrap {
 		width: 80%;
 		height: auto;
@@ -124,12 +123,15 @@ main {
 
 	.text-container {
 		text-transform: uppercase;
-		font-size: em(68);
-		padding-bottom: em(20, 68);
+		font-size: em(80);
+		padding-bottom: em(20, 80);
 		text-align: center;
-		line-height: 1;
+		line-height: 1.2;
 		a {
 			color: $default-color;
+		}
+		span {
+			font-size: 0.6em;
 		}
 	}
 
@@ -159,7 +161,7 @@ button {
 		background: #fff;
 	}
 	&.inactive {
-		@include opacity( 0.3 );
+		@include opacity(0.3);
 	}
 
 	&.inactive {
@@ -202,8 +204,6 @@ footer {
 	}
 }
 
-
-
 body {
 	&.slide-in {
 		main {
@@ -223,6 +223,7 @@ body {
 		}
 
 		.detail-container {
+			@include transition(transform 1s ease-in-out);
 			@include transform(translate3d(0, 0, 0));
 		}
 
@@ -233,6 +234,13 @@ body {
 				@include colours(background-color);
 				color: white;
 			}
+		}
+	}
+
+	&.slide-out {
+		.detail-container {
+			@include transition(transform 1s ease-in-out);
+			@include transform(translate3d(100%, 0, 0));
 		}
 	}
 }
