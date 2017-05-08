@@ -87,8 +87,9 @@ export default class WordSlider {
 
 		if ( newFontSize !== this._currentFontSize ) {
 			this._currentFontSize = newFontSize;
-			this.changeFontSize();
 		}
+		
+		this.changeFontSize();
 	}
 
 	start() {
