@@ -36,7 +36,7 @@ export default class WordSlider {
 		this._startDecreasingSpeed = null;
 		this._currentTimeStamp = null;
 		this._currentFontSize = null;
-		this._textArr = WordSlider.createTextArray();
+		this._wordList = [];
 		this._button = document.getElementById( 'stop-slider' );
 		this._win = window;
 
@@ -51,6 +51,9 @@ export default class WordSlider {
 			this._resizeHandlerTimeout = setTimeout( this._handleResize.bind( this ), 500 );
 		} );
 
+		globalEmitter.subscribe( EVENTS.WORD_LIST_UPDATED, ( e, wordList ) => {
+			this._wordList = wordList;
+		} );
 		globalEmitter.subscribe( EVENTS.PLAY_WORD_SLIDER, () => this.start() );
 	}
 
@@ -85,6 +88,7 @@ export default class WordSlider {
 	}
 
 	start() {
+		this._textArr = WordSlider.createTextArray( this._wordList );
 		this._handleResize();
 		this._isActive = true;
 		this._startTime = Date.now();
@@ -106,7 +110,7 @@ export default class WordSlider {
 			if ( this._currentTime >= this._currentSpeed ) {
 				this._currentTime = 0;
 				this._textArr[ this._currentText ].stop();
-				this._currentText = ( this._currentText + 1 === WORD_LIST.length ? 0 : this._currentText + 1 );
+				this._currentText = ( this._currentText + 1 === this._wordList.length ? 0 : this._currentText + 1 );
 				this._textArr[ this._currentText ].start();
 			}
 
@@ -143,10 +147,10 @@ export default class WordSlider {
 		}
 	}
 
-	static createTextArray() {
+	static createTextArray( wordList ) {
 		let arr = [];
-		for ( let i = 0; i < WORD_LIST.length; i++ ) {
-			arr.push( new Text( WORD_LIST[ i ], { animDuration: TIME_BETWEEN_TEXTS + OVERLAP_TIME_TEXTS } ) );
+		for ( let i = 0; i < wordList.length; i++ ) {
+			arr.push( new Text( wordList[ i ], { animDuration: TIME_BETWEEN_TEXTS + OVERLAP_TIME_TEXTS } ) );
 		}
 		return arr;
 	}

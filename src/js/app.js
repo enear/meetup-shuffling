@@ -1,3 +1,4 @@
+import WordList from "./modules/WordList";
 import WordSlider from "./modules/WordSlider";
 import { PIXEL_RATIO, CANVAS_DIMENSIONS, EVENTS } from "./constants";
 import globalEmitter from "./modules/Emitter";
@@ -14,18 +15,20 @@ import globalEmitter from "./modules/Emitter";
 			this._canvas.style.height = CANVAS_DIMENSIONS.height + 'px';
 			this._ctx = this._canvas.getContext( '2d' );
 			this._isActive = true;
+			this._wordList = new WordList();
 			this._wordSlider = new WordSlider();
-			this._tick( 0 );
 
-			globalEmitter.subscribe( EVENTS.RESOLUTION_WINNER, ( e, word ) => {
-				
+			globalEmitter.subscribe( EVENTS.WORD_LIST_UPDATED, ( e, wordList ) => {
+				if ( wordList.length > 0 ) {
+					this._start();
+				}
 			} );
 
-			this._start();
 		};
 
-		_start(){
+		_start() {
 			globalEmitter.invoke( EVENTS.PLAY_WORD_SLIDER );
+			this._tick( 0 );
 		}
 
 		_tick( timeDelta, timestamp ) {

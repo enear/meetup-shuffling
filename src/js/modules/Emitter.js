@@ -1,5 +1,4 @@
 let globalEmitter = (function () {
-
 	class Emitter{
 		constructor(){
 			this._events = {};
@@ -66,9 +65,7 @@ let globalEmitter = (function () {
 			return id;
 		}
 	}
-
 	return new Emitter();
-
 })();
 
 export default globalEmitter;
